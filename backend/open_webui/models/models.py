@@ -95,6 +95,8 @@ class Model(Base):
     #      }
     #   }
 
+    price = Column(JSON, nullable=True)
+
     is_active = Column(Boolean, default=True)
 
     updated_at = Column(BigInteger)
@@ -111,6 +113,8 @@ class ModelModel(BaseModel):
     meta: ModelMeta
 
     access_control: Optional[dict] = None
+
+    price: Optional[dict] = None
 
     is_active: bool
     updated_at: int  # timestamp in epoch
@@ -139,6 +143,7 @@ class ModelForm(BaseModel):
     meta: ModelMeta
     params: ModelParams
     access_control: Optional[dict] = None
+    price: Optional[dict] = None
     is_active: bool = True
 
 
