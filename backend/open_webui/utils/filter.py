@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 log.setLevel(SRC_LOG_LEVELS["MAIN"])
 
 
-def get_sorted_filter_ids(model):
+def get_sorted_filter_ids(model: dict):
     def get_priority(function_id):
         function = Functions.get_function_by_id(function_id)
         if function is not None and hasattr(function, "valves"):
@@ -33,12 +33,13 @@ def get_sorted_filter_ids(model):
 
 
 async def process_filter_functions(
-    request, filter_ids, filter_type, form_data, extra_params
+    request, filter_functions, filter_type, form_data, extra_params
 ):
     skip_files = None
 
-    for filter_id in filter_ids:
-        filter = Functions.get_function_by_id(filter_id)
+    for function in filter_functions:
+        filter = function
+        filter_id = function.id
         if not filter:
             continue
 
